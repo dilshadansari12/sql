@@ -1,0 +1,162 @@
+## select
+
+```sql
+SELECT * FROM student // for all table
+SELECT id, name FROM student; // for specifc columns
+
+-- we user Where Clause for condition : any operation like  + , <..
+
+SELECT col1, col2 FROM table_name WHERE conditions;
+SELECT id, name FROM student WHERE mark <> 30;
+SELECT id, name , mark  FROM student WHERE mark name ='dilshad';
+
+-- LIMITE RETURN SET LIMITED DATA
+SELECT id,mark FROM student LIMIT 5;
+
+--  ORDER BY RETUNR IN ASS , DECS
+SELECT * FROM student WHERE ORDER BY DESC;
+
+-- Aggregate Functions
+SELECT SUM(mark) FROM student WHERE mark > 80 AND LIMIT 10;
+
+-- Group By Clause
+-- Groups rows that have the same values into summary rows.
+-- It collects data from multiple records and groups the result by
+--  one or more column.
+-- *Generally we use group by with some aggregation function.
+
+SELECT city FROM student GROUP BY city;
+
+-- Similar to Where i.e. applies some condition on rows.
+-- Used when we want to apply any condition after grouping.
+
+SELECT city FROM STUDENT GROUP BY city HAVING city = 'delhi'
+ OR 'ranchi';
+
+
+-- general order formet
+
+SELECT column(s)
+FROM table_name
+WHERE condition
+GROUP BY column(s)
+HAVING condition
+ORDER BY column(s) ASC;
+
+```
+
+## FROM
+
+## SQL Joins
+
+SQL joins are used to combine rows from two or more tables based on a related column between them.
+
+### Types of Joins
+
+1. **INNER JOIN**: Returns records that have matching values in both tables.
+
+2. **LEFT JOIN** (or LEFT OUTER JOIN): Returns all records from the left table, and the matched records from the right table. The result is NULL from the right side if there is no match.
+3. **RIGHT JOIN** (or RIGHT OUTER JOIN): Returns all records from the right table, and the matched records from the left table. The result is NULL from the left side when there is no match.
+4. **FULL JOIN** (or FULL OUTER JOIN): Returns all records when there is a match in either left or right table. The result is NULL from one side when there is no match.
+5. **CROSS JOIN**: Returns the Cartesian product of the two tables, i.e., it returns all possible combinations of rows.
+
+`INNER JOIN`
+
+```SQL
+SELECT column(s)
+FROM tableA
+INNER JOIN tableB
+ON tableA.col_name = tableB.col_name;
+
+SELECT * FROM TABLE
+student AS a
+IINER JOIN MARKS AS b
+INNER JOIN ON a.id = b.id;
+```
+
+`LEFT JOIN`
+
+```sql
+SELECT column(s)
+FROM tableA
+LEFT JOIN tableB
+ON tableA.col_name = tableB.col_name;
+
+
+SELECT * FROM TABLE
+student AS a
+IINER JOIN MARKS AS b
+LEFT JOIN ON a.id = b.id;
+```
+
+`RIGHT JOIN`
+
+```SQL
+SELECT column(s)
+FROM tableA
+RIGHT JOIN tableB
+ON tableA.col_name = tableB.col_name;
+```
+
+`FULL JOIN`
+```SQL
+SELECT column(s)
+FROM tableA
+FULL JOIN tableB
+ON tableA.col_name = tableB.col_name;
+```
+
+`SELF JOIN`
+
+```SQL
+SELECT column(s)
+FROM table as a
+JOIN table as b
+ON a.col_name = b.col_name;
+```
+
+## UNION 
+`it is used to combine the result-set of two or more SELECT statements.
+Gives UNIQUE records.
+every SELECT should have same no. of columns
+columns must have similar data types
+columns in every SELECT should be in same order
+`
+
+```sql
+SELECT column(s) FROM tableA
+UNION
+SELECT column(s) FROM tableB
+```
+
+## SQL Views
+
+A view in SQL is a virtual table that provides a way to simplify complex queries. It is created by querying one or more tables and can be used just like a regular table.
+
+### Creating a View
+
+To create a view, use the `CREATE VIEW` statement followed by the view name and the `AS` keyword, followed by a `SELECT` statement.
+
+```sql
+CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+
+CREATE VIEW student_departments AS
+SELECT students.id, students.name AS student_name, departments.name 
+AS department_name
+FROM students
+INNER JOIN departments ON students.department_id = departments.id;
+
+SELECT * FROM student_departments;
+
+```
+
+id  | student_name | department_name
+----|--------------|----------------
+1   | John Doe     | Computer Science
+2   | Jane Smith   | Mathematics
+
+
+## SQL Sub Queries

@@ -1,0 +1,187 @@
+## DDL (Data Definition Language) create, alter, rename, truncate & drop
+
+`CREATE DATABASE 🔥`
+
+```sql
+CREATE DATABASE db_name;
+CREATE DATABASR IF NOT EXISTS db_name;
+
+CREATE DATABASE optafloor;
+CREATE DATABASE IF NOT EXISTS pacific;
+
+```
+
+`DELETE DATABASE 🔥`
+
+```sql
+DROP DATABASE db_name;
+DROP DATABASE IF EXISTS db_name;
+
+DROP DATABASE optafloor;
+DROP DATABASE IF EXISTS pacifc;
+```
+
+```sql
+SHOW DATABASE; // not supported postgress
+show TABLE;
+```
+
+`TABLE 🔥`
+
+```sql
+CREATE TABLE db_name VALUES(
+ column_name data_type constarint
+)
+
+CREATE TABLE students (
+    id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    age INT CHECK (age >= 18),
+    status VARCHAR(10) DEFAULT 'active',
+    department_id INT,
+    FOREIGN KEY (department_id) REFERENCES departments(id)
+);
+
+-- Rename
+ALTER TABLE tb_name RENAME TO new_tb_name;
+ALTER TABLE studnet RENAME TO section;
+
+-- Delete table  : delete table fro, database
+DROP TABLE tb_name FROM DB;
+DROP TABLE student FROM optafloor;
+
+-- TRUNCATE TABLE :- remove all rowm from table
+TRUNCATE TABLE student
+
+```
+
+`COLUMNS 🔥🔥`
+
+```SQL
+
+-- MODIFY COLUMNS
+
+ALTER TABLE table_name
+MODIFY col_name new_datatype new_constraint;
+
+ALTER TABLE student
+MODIFY mark INTEGER FOREN KEY
+
+-- RENAME COLUMNS
+
+ALTER TABLE table_name
+RENAME COLUMN old_name new_name new_datatype new_constraint;
+
+ALTER TABLE student
+RENAME COLUMN name student_name VARHCAR(40)
+
+-- DELETE COLUMSN
+
+ALTER TABLE table_name
+DROP COLUMN column_name;
+
+ALTER TABLE student
+DROP COLUMN location
+
+-- Add Columns
+
+ALTER TABLE table_name
+ADD COLUMN column_name datatype constraint;
+
+ALTER TABLE student
+ADD COLUMNS school_name VARCHAR(50) DEFAULT 'MPS'
+
+```
+
+`SQL Constraints 🔥`
+
+SQL constraints are used to specify rules for the data in a table. These rules help ensure the integrity and accuracy of the data.
+
+1. **`NOT NULL`**: Ensures that a column cannot have a NULL value.
+
+   ```sql
+   id INTEGER NOT NULL;
+   ```
+
+2. **`UNIQUE`**: Ensures that all values in a column are unique.
+
+   ```sql
+   id INT UNIQUE;
+   ```
+
+3. **`PRIMARY KEY`**: A combination of `UNIQUE` and `NOT NULL`. It uniquely identifies each record in a table. Each table can have only one primary key.
+
+   ```sql
+   id INT PRIMARY KEY;
+   ```
+
+4. **`FOREIGN KEY`**: Prevents actions that would destroy links between tables. It enforces a link between the data in two tables.
+
+   ```sql
+   student_id INT,
+   FOREIGN KEY (student_id) REFERENCES students(id);
+   ```
+
+5. **`DEFAULT`**: Sets a default value for a column if no value is specified.
+
+   ```sql
+   status VARCHAR(10) DEFAULT 'active';
+   ```
+
+6. **`CHECK`**: Ensures that the values in a column meet a specific condition.
+   ```sql
+   age INT CHECK (age >= 18);
+   ```
+
+```sql
+-- insert value in table
+INSERT INTO table_name (colname1, colname2)
+VALUES(col1_v1, col2_v1),(col1_v2, col2_v2);
+
+INSERT INTO student (id , name , age)
+VALUES(1, 'dilshad', 20)(2,'zakiya',19);
+
+-- update row
+
+UPDATE table_name
+SET col1 = val1, col2 = val2
+WHERE condition;
+
+UPDATE student SET grade = 'o+' WHERE grade = 'A';
+
+-- delete row
+
+DELETE FROM table_name
+WHERE condition;
+
+DELETE student WHERE mark < 30;
+
+
+```
+
+## Cascading for FK
+
+- **`ON DELETE CASCADE`**: Deletes the referencing rows in the child table when the referenced row is deleted in the parent table.
+
+- **`ON UPDATE CASCADE`**: Updates the referencing rows in the child table when the referenced row is updated in the parent table.
+
+```sql
+
+CREATE TABLE departments (
+    id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE students (
+    id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    age INT CHECK (age >= 18),
+    status VARCHAR(10) DEFAULT 'active',
+    department_id INT,
+    FOREIGN KEY (department_id) REFERENCES departments(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+```
