@@ -1,1 +1,43 @@
 ![SQL Learning roadmap](./assets/dbroadmap.png)
+
+
+
+# SQL Languages
+
+## 1. DDL (Data Definition Language)
+- **Definition:** DDL statements are used to define the database structure or schema.
+- **Commands:**
+    - `CREATE`: Creates a new table, a view of a table, or other object in the database.
+    - `ALTER`: Modifies an existing database object, such as a table.
+    - `DROP`: Deletes an entire table, a view of a table, or other objects in the database.
+    - `TRUNCATE`: Removes all records from a table, including all spaces allocated for the records.
+    - `COMMENT`: Adds comments to the data dictionary.
+    - `RENAME`: Renames an object.
+
+## 2. DML (Data Manipulation Language)
+- **Definition:** DML statements are used for managing data within schema objects.
+- **Commands:**
+    - `SELECT`: Retrieves data from the database.
+    - `INSERT`: Inserts data into a table.
+    - `UPDATE`: Updates existing data within a table.
+    - `DELETE`: Deletes all records from a table, the space for the records remains.
+    - `MERGE`: Performs `INSERT`, `UPDATE`, or `DELETE` operations in a single statement.
+
+## 3. DCL (Data Control Language)
+- **Definition:** DCL statements control access to data within the database.
+- **Commands:**
+    - `GRANT`: Gives user's access privileges to the database.
+    - `REVOKE`: Withdraws user's access privileges given by using the `GRANT` command.
+
+## 4. TCL (Transaction Control Language)
+- **Definition:** TCL statements manage the changes made by DML statements.
+- **Commands:**
+    - `COMMIT`: Saves the work done.
+    - `ROLLBACK`: Restores the database to the original since the last `COMMIT`.
+    - `SAVEPOINT`: Sets a savepoint within a transaction.
+    - `SET TRANSACTION`: Places a name on a transaction.
+
+## 5. DQL (Data Query Language)
+- **Definition:** DQL is used to query the database and retrieve data.
+- **Commands:**
+    - `SELECT`: Retrieves data from the database. (Note: `SELECT` is often categorized under DML, but it can also be considered part of DQL as it is primarily used for querying data.)
